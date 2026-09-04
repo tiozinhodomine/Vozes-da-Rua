@@ -131,4 +131,4 @@ Licença
 
 Este projeto foi desenvolvido para fins acadêmicos.
 
-© 2026 Vozes da Rua. Todos os direitos reservado
+© 2026 Vozes da Rua
