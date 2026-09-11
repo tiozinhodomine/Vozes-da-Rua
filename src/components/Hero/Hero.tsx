@@ -39,6 +39,7 @@ export default function Hero() {
                 duration-300
               "
             >
+              
               Quero ajudar
             </button>
 
