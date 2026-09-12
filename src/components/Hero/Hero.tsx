@@ -38,8 +38,10 @@ export default function Hero() {
                 transition-all
                 duration-300
               "
+              onClick={() => {
+                window.location.href = "/form";
+              }}
             >
-              
               Quero ajudar
             </button>
 
