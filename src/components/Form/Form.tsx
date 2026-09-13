@@ -33,6 +33,21 @@ export function Form() {
         <input type="number" placeholder="R$ 0,00" />
       </label>
       <button type="submit">Enviar</button>
+      <label >
+        <p>Deseja fazer trabalho voluntário?</p>
+        <select name="Yes/No" id="">
+          <option value="Yes">Sim</option>
+          <option value="No">Não</option>
+        </select>
+        <select name="ONG" id="ONG">
+          <option >Selecione uma opção</option>
+          <option value="ong-1">ONG 1</option>
+          <option value="ong-2">ONG 2</option>
+          <option value="ong-3">ONG 3</option>
+        </select>
+
+
+      </label>
     </form>
   )
 
