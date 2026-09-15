@@ -1,12 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import heroImage from "../../assets/images/hero/hero.png";
+// import { FormPage } from "../../pages/FormPage/FormPage";
 
 export default function Hero() {
+
+  const navigate = useNavigate();
   return (
     <section className="w-full bg-[#F1F5F9]">
       <div className="max-w-7xl mx-auto min-h-[85vh] flex items-center justify-between px-8">
-
         <div className="max-w-xl">
-
           <span className="text-blue-600 font-semibold">
             Plataforma Solidária
           </span>
@@ -15,8 +17,7 @@ export default function Hero() {
             Conectando
             <br />
             solidariedade
-            <br />
-            à ação.
+            <br />à ação.
           </h1>
 
           <p className="mt-6 text-lg text-slate-600 leading-8">
@@ -25,7 +26,6 @@ export default function Hero() {
           </p>
 
           <div className="flex gap-4 mt-10">
-
             <button
               className="
                 bg-blue-600
@@ -38,10 +38,7 @@ export default function Hero() {
                 transition-all
                 duration-300
               "
-              onClick={() => {
-                window.location.href = "/form";
-              }}
-            >
+              onClick={()=> navigate("FormPage")}>
               Quero ajudar
             </button>
 
@@ -61,21 +58,16 @@ export default function Hero() {
             >
               Ver organizações
             </button>
-
           </div>
-
         </div>
 
         <div className="w-[500px]">
-
           <img
             src={heroImage}
             alt="Voluntários ajudando pessoas em situação de rua"
             className="w-full mix-blend-multiply"
           />
-
         </div>
-
       </div>
     </section>
   );

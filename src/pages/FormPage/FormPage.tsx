@@ -1,56 +1,75 @@
+import styles from "./style.module.css";
 
 export function FormPage() {
-    return (
-    
-    <form>
+  return (
+    <form className={styles.form}>
+      <h1 className={styles.title}>Faça sua doação</h1>
 
-      <label >
-        Escreva o seu Nome
-        <input type="text" />
+      <label className={styles.field}>
+        Escreva o seu nome
+        <input type="text" required />
       </label>
 
-      <label >
-        Escreva o seu Email
-        <input type="email" />
+      <label className={styles.field}>
+        Escreva o seu e-mail
+        <input type="email" required />
       </label>
 
-
-      <label >
-        Escreva seu numero de telefone
-        <input type="tel" />
+      <label className={styles.field}>
+        Escreva seu número de telefone
+        <input
+          autoComplete="tel"
+          type="tel"
+          placeholder="(11) 99999-9999"
+          pattern="\([0-9]{2}\) [0-9]{5}-[0-9]{4}"
+          title="Formato esperado: (11) 99999-9999"
+        />
       </label>
 
-      <label >
-        <p>Opções para Doação</p>
-        <label htmlFor="payment-method">Forma de Pagamento</label>
-        <select name="payment-method" id="payment-method">
-          <option >Selecione uma opção</option>
-          <option value="credit-card">Cartão de Crédito</option>
-          <option value="debit-card">Cartão de Débito</option>
+      <label className={styles.field}>
+        <span className={styles.sectionTitle}>Forma de pagamento</span>
+        <select name="payment-method" required>
+          <option value="">Selecione uma opção</option>
+          <option value="credit-card">Cartão de crédito</option>
+          <option value="debit-card">Cartão de débito</option>
           <option value="bank-transfer">Pix</option>
         </select>
       </label>
-      <label >
-        <p>Quantia da Doação</p>
-        <input type="number" placeholder="R$ 0,00" />
+
+      <label className={styles.field}>
+        <span className={styles.sectionTitle}>Quantia da doação</span>
+        <input
+          type="number"
+          min="1"
+          step="0.01"
+          placeholder="R$ 0,00"
+          required
+        />
       </label>
-      <button type="submit">Enviar</button>
-      <label >
-        <p>Deseja fazer trabalho voluntário?</p>
-        <select name="Yes/No" id="">
-          <option value="Yes">Sim</option>
-          <option value="No">Não</option>
+
+      <label className={styles.field}>
+        <span className={styles.sectionTitle}>
+          Deseja fazer trabalho voluntário?
+        </span>
+        <select name="volunteer">
+          <option value="yes">Sim</option>
+          <option value="no">Não</option>
         </select>
-        <select name="ONG" id="ONG">
-          <option >Selecione uma opção</option>
+      </label>
+
+      <label className={styles.field}>
+        ONG de interesse
+        <select name="ong">
+          <option value="">Selecione uma opção</option>
           <option value="ong-1">ONG 1</option>
           <option value="ong-2">ONG 2</option>
           <option value="ong-3">ONG 3</option>
         </select>
-
-
       </label>
-    </form>
-    )
-}
 
+      <button className={styles.submitButton} type="submit">
+        Enviar
+      </button>
+    </form>
+  );
+}

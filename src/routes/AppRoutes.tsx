@@ -1,21 +1,20 @@
-import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
-import { FormPage } from "../pages/FormPage/FormPage";
+import { Route, Routes } from "react-router";
 import About from "../pages/About/about";
 import Home from "../pages/Home/home";
-import Organizations from "../pages/Organizations/organizations";
+import { FormPage } from "../pages/FormPage/FormPage";
 
 
-export const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      { path: "/App", element: <App /> },
-      { path: "/sobre", element: <About /> },
-      { path: "/Home", element: <Home /> },
-      { path: "/Organization", element: <Organizations /> },
-      { path: "/Form", element: <FormPage /> },
-    ],
-  },
-]);
+
+export default function AppRoutes() {
+  return (
+  <Routes>
+    <Route element={<MainLayout/>}>
+    <Route path="/Home"  element={<Home/>}/>
+    <Route path="/sobre"  element={<About/>}/>
+    <Route path="/Form"  element={<FormPage/>}/>
+    </Route>
+    <Route path="*" element={<Notfound/>}/>
+  </Routes>
+  
+  
+  )}
