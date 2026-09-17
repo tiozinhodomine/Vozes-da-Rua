@@ -1,6 +1,20 @@
+import { useState } from "react";
 import styles from "./style.module.css";
 
+function formatPhone(value: string) {
+  const digits = value.replace(/\D/g, "").slice(0, 11);
+
+  if (!digits) return "";
+  if (digits.length <= 2) return `(${digits}`;
+  if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+}
+
 export function FormPage() {
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+
   return (
     <form className={styles.form}>
       <h1 className={styles.title}>Faça sua doação</h1>
@@ -11,18 +25,32 @@ export function FormPage() {
       </label>
 
       <label className={styles.field}>
-        Escreva o seu e-mail
-        <input type="email" required />
+        Escreva seu email
+        <input
+          id="email"
+          name="email"
+          placeholder="digite seu email"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          type="email"
+          required
+          value={email}
+          inputMode="email"
+          onChange={(event) => setEmail(event.target.value)}
+        />
       </label>
 
-      <label className={styles.field}>
+      <label htmlFor="phone" className={styles.field}>
         Escreva seu número de telefone
         <input
-          autoComplete="tel"
           type="tel"
+          id="phone"
+          name="phone"
+          pattern={String.raw`\([1-9][0-9]\) 9[0-9]{4}-[0-9]{4}`}
           placeholder="(11) 99999-9999"
-          pattern="\([0-9]{2}\) [0-9]{5}-[0-9]{4}"
-          title="Formato esperado: (11) 99999-9999"
+          inputMode="tel"
+          value={phone}
+          onChange={(event) => setPhone(formatPhone(event.target.value))}
+          required
         />
       </label>
 
