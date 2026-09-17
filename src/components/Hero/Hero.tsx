@@ -38,7 +38,7 @@ export default function Hero() {
                 transition-all
                 duration-300
               "
-              onClick={()=> navigate("FormPage")}>
+              onClick={() => navigate("/quero-ajudar")}>
               Quero ajudar
             </button>
 
@@ -61,7 +61,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="w-[500px]">
+        <div className="w-125">
           <img
             src={heroImage}
             alt="Voluntários ajudando pessoas em situação de rua"
