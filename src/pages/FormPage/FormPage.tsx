@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./style.module.css";
 
 function formatPhone(value: string) {
@@ -14,9 +15,17 @@ function formatPhone(value: string) {
 export function FormPage() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
   return (
     <form className={styles.form}>
+      <button
+        className={styles.backButton}
+        type="button"
+        onClick={() => navigate("/")}
+      >
+        Voltar
+        </button>
       <h1 className={styles.title}>Faça sua doação</h1>
 
       <label className={styles.field}>
