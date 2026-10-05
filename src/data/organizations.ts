@@ -1,4 +1,3 @@
-
 export const organizations = [
     {
       id: 1,

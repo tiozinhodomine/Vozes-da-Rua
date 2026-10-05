@@ -1,7 +1,11 @@
 import logo from "../../assets/logo/logo.png";
 import { Link } from "react-router-dom";
+import { UserRound } from "lucide-react";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function Navbar() {
+  const { user } = useAuth();
+
   return (
     <header
       className="
@@ -24,12 +28,10 @@ export default function Navbar() {
           justify-between
         "
       >
-
-        {}
         <Link to="/" className="flex items-center gap-3">
           <img
             src={logo}
-            alt="Logo da Vozes"
+            alt="Logo da Vozes da Rua"
             className="w-10 h-10"
           />
 
@@ -38,15 +40,13 @@ export default function Navbar() {
           </h2>
         </Link>
 
-        {}
         <ul className="flex gap-8 text-slate-700 font-medium">
-
           <li>
             <Link
-              to="/sobre"
+              to="/"
               className="hover:text-blue-600 transition"
             >
-              Sobre Nós
+              Home
             </Link>
           </li>
 
@@ -59,25 +59,36 @@ export default function Navbar() {
             </Link>
           </li>
 
+          <li>
+            <Link
+              to="/sobre"
+              className="hover:text-blue-600 transition"
+            >
+              Sobre Nós
+            </Link>
+          </li>
         </ul>
 
-        {}
         <Link
-          to="/quero-ajudar"
+          to={user ? "/perfil" : "/login"}
           className="
+            flex
+            items-center
+            gap-2
             bg-blue-600
-            hover:bg-green-600
+            hover:bg-blue-700
             text-white
-            px-6
+            px-5
             py-3
             rounded-xl
             font-semibold
             transition
           "
         >
-          Quero ajudar
-        </Link>
+          <UserRound size={19} />
 
+          {user?.displayName || "Meu perfil"}
+        </Link>
       </nav>
     </header>
   );

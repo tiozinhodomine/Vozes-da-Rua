@@ -3,6 +3,9 @@ import About from "../pages/About/about";
 import Home from "../pages/Home/home";
 import { FormPage } from "../pages/FormPage/FormPage";
 import Organizations from "../pages/Organizations/organizations";
+import Profile from "../pages/Profile/Profile";
+import Login from "../pages/Login/Login";
+import Register from "../pages/Register/Register";
 
 function MainLayout() {
   return <Outlet />;
@@ -21,8 +24,11 @@ export default function AppRoutes() {
         <Route path="/sobre" element={<About />} />
         <Route path="/organizacoes" element={<Organizations />} />
         <Route path="/quero-ajudar" element={<FormPage />} />
+        <Route path="/perfil" element={<Profile />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/criar-conta" element={<Register />} />
 
-        {/* Keep the previous form URL working. */}
+        {}
         <Route path="/Form" element={<Navigate to="/quero-ajudar" replace />} />
       </Route>
       <Route path="*" element={<Notfound />} />
