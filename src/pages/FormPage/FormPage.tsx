@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type FormEvent,  } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./style.module.css";
 
@@ -13,24 +13,86 @@ function formatPhone(value: string) {
 }
 
 export function FormPage() {
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
+  const [formData, setFormData] = useState({
+    nome: "",
+    email: "",
+    phone: "",
+    paymentMethod: "",
+    valor: "",
+    volunteer: "no",
+    ong: "",
+  });
+
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+
+    if (name === "phone") {
+      setFormData((prev) => ({ ...prev, phone: formatPhone(value) }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();         
+    setStatus("loading");
+    setMessage("");
+
+    try {
+      const response = await fetch("http://localhost:3000/api/doacoes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nome: formData.nome,
+          email: formData.email,
+          telefone: formData.phone.replace(/\D/g, ""), // only digits
+          forma_pagamento: formData.paymentMethod,
+          valor: Number(formData.valor),
+          voluntario: formData.volunteer === "yes" ? "sim" : "nao",
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Falha ao enviar doação");
+      }
+
+      setStatus("success");
+      setMessage("Doação registrada com sucesso!");
+    } catch (err) {
+      setStatus("error");
+      setMessage(err instanceof Error ? err.message : "Erro inesperado");
+    }
+  };
+
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <button
         className={styles.backButton}
         type="button"
         onClick={() => navigate("/")}
       >
         Voltar
-        </button>
+      </button>
+
       <h1 className={styles.title}>Faça sua doação</h1>
 
       <label className={styles.field}>
         Escreva o seu nome
-        <input type="text" required />
+        <input
+          type="text"
+          name="nome"
+          required
+          value={formData.nome}
+          onChange={handleChange}
+        />
       </label>
 
       <label className={styles.field}>
@@ -39,12 +101,10 @@ export function FormPage() {
           id="email"
           name="email"
           placeholder="digite seu email"
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
           type="email"
           required
-          value={email}
-          inputMode="email"
-          onChange={(event) => setEmail(event.target.value)}
+          value={formData.email}
+          onChange={handleChange}
         />
       </label>
 
@@ -54,18 +114,22 @@ export function FormPage() {
           type="tel"
           id="phone"
           name="phone"
-          pattern={String.raw`\([1-9][0-9]\) 9[0-9]{4}-[0-9]{4}`}
           placeholder="(11) 99999-9999"
           inputMode="tel"
-          value={phone}
-          onChange={(event) => setPhone(formatPhone(event.target.value))}
+          value={formData.phone}
+          onChange={handleChange}
           required
         />
       </label>
 
       <label className={styles.field}>
         <span className={styles.sectionTitle}>Forma de pagamento</span>
-        <select name="payment-method" required>
+        <select
+          name="paymentMethod"
+          required
+          value={formData.paymentMethod}
+          onChange={handleChange}
+        >
           <option value="">Selecione uma opção</option>
           <option value="credit-card">Cartão de crédito</option>
           <option value="debit-card">Cartão de débito</option>
@@ -77,10 +141,13 @@ export function FormPage() {
         <span className={styles.sectionTitle}>Quantia da doação</span>
         <input
           type="number"
+          name="valor"
           min="1"
           step="0.01"
           placeholder="R$ 0,00"
           required
+          value={formData.valor}
+          onChange={handleChange}
         />
       </label>
 
@@ -88,7 +155,11 @@ export function FormPage() {
         <span className={styles.sectionTitle}>
           Deseja fazer trabalho voluntário?
         </span>
-        <select name="volunteer">
+        <select
+          name="volunteer"
+          value={formData.volunteer}
+          onChange={handleChange}
+        >
           <option value="yes">Sim</option>
           <option value="no">Não</option>
         </select>
@@ -96,7 +167,7 @@ export function FormPage() {
 
       <label className={styles.field}>
         ONG de interesse
-        <select name="ong">
+        <select name="ong" value={formData.ong} onChange={handleChange}>
           <option value="">Selecione uma opção</option>
           <option value="ong-1">ONG 1</option>
           <option value="ong-2">ONG 2</option>
@@ -104,9 +175,20 @@ export function FormPage() {
         </select>
       </label>
 
-      <button className={styles.submitButton} type="submit">
-        Enviar
+      <button
+        className={styles.submitButton}
+        type="submit"
+        disabled={status === "loading"}
+      >
+        {status === "loading" ? "Enviando…" : "Enviar"}
       </button>
+
+      {status === "success" && (
+        <p style={{ color: "green" }}>{message}</p>
+      )}
+      {status === "error" && (
+        <p style={{ color: "red" }}>{message}</p>
+      )}
     </form>
   );
 }
