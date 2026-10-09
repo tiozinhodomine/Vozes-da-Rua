@@ -430,13 +430,6 @@ export default function About() {
               Conhecer organizações
             </Link>
 
-            <Link
-              to="/quero-ajudar"
-              className="rounded-xl border border-white/20 bg-white/10 px-7 py-3.5 font-bold text-white transition hover:bg-white/15"
-            >
-              Quero ajudar
-            </Link>
-
           </div>
 
         </div>

@@ -24,6 +24,7 @@ export default function FeaturedOrganizations() {
           {organizations.map((organization) => (
             <OrganizationCard
               key={organization.id}
+              id={organization.id}
               nome={organization.nome}
               cidade={organization.cidade}
               descricao={organization.descricao}
