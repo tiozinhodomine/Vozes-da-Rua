@@ -58,17 +58,33 @@ export function FormPage() {
         }),
       });
 
-      const data = await response.json();
+      const responseText = await response.text();
+      let data: { error?: string; message?: string } = {};
+
+      try {
+        data = responseText ? JSON.parse(responseText) : {};
+      } catch {
+        // Include non-JSON API responses in the error shown to the user.
+      }
 
       if (!response.ok) {
-        throw new Error(data.error || "Falha ao enviar doação");
+        throw new Error(
+          data.error || data.message || responseText ||
+            `Falha ao enviar doação (HTTP ${response.status} ${response.statusText})`
+        );
       }
 
       setStatus("success");
       setMessage("Doação registrada com sucesso!");
     } catch (err) {
       setStatus("error");
-      setMessage(err instanceof Error ? err.message : "Erro inesperado");
+      setMessage(
+        err instanceof TypeError
+          ? `Não foi possível conectar à API localhost:3000. Confirme que o servidor está ativo e que o CORS está configurado. (${err.message})`
+          : err instanceof Error
+            ? err.message
+            : "Erro inesperado"
+      );
     }
   };
 
