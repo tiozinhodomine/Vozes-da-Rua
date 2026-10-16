@@ -20,22 +20,14 @@ export default function Login() {
       await signInWithEmailAndPassword(auth, email, password);
 
       navigate("/perfil");
-    } catch (error: unknown) {
-      const firebaseError =
-        typeof error === "object" && error !== null ? error : undefined;
-
-      const code =
-        firebaseError && "code" in firebaseError
-          ? firebaseError.code
-          : undefined;
-
+    } catch (error: any) {
       if (
-        code === "auth/invalid-credential" ||
-        code === "auth/user-not-found" ||
-        code === "auth/wrong-password"
+        error.code === "auth/invalid-credential" ||
+        error.code === "auth/user-not-found" ||
+        error.code === "auth/wrong-password"
       ) {
         setError("Email ou senha incorretos.");
-      } else if (code === "auth/invalid-email") {
+      } else if (error.code === "auth/invalid-email") {
         setError("Digite um email válido.");
       } else {
         setError("Não foi possível entrar na conta.");

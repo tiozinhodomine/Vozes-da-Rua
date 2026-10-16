@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import heroImage from "../../assets/images/hero/hero.png";
-// import { FormPage } from "../../pages/FormPage/FormPage";
 
 export default function Hero() {
 
@@ -38,26 +37,11 @@ export default function Hero() {
                 transition-all
                 duration-300
               "
-              onClick={() => navigate("/quero-ajudar")}>
+              onClick={() => navigate("/organizacoes")}>
               Quero ajudar
+              
             </button>
 
-            <button
-              className="
-                border
-                border-blue-600
-                text-blue-600
-                px-8
-                py-4
-                rounded-xl
-                font-semibold
-                hover:bg-blue-100
-                transition-all
-                duration-300
-              "
-            >
-              Ver organizações
-            </button>
           </div>
         </div>
 
