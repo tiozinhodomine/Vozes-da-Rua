@@ -1,4 +1,6 @@
+
 import { Link } from "react-router-dom";
+import OrganizationFavoriteButton from "../OrganizationFavoriteButton/OrganizationFavoriteButton";
 
 interface OrganizationCardProps {
   id: number;
@@ -27,14 +29,21 @@ export default function OrganizationCard({
         overflow-hidden
       "
     >
-      <div className="h-48 bg-slate-200 flex items-center justify-center">
+      {}
+      <div className="relative h-48 bg-slate-200 flex items-center justify-center">
         <span className="text-slate-500">
           Imagem da ONG
         </span>
+
+        <div className="absolute top-3 right-3">
+          <OrganizationFavoriteButton
+            organizationId={id}
+            compact
+          />
+        </div>
       </div>
 
       <div className="p-6">
-
         <h3 className="text-2xl font-bold text-slate-900">
           {nome}
         </h3>
@@ -82,7 +91,6 @@ export default function OrganizationCard({
         >
           Ver Perfil
         </Link>
-
       </div>
     </div>
   );
