@@ -118,5 +118,5 @@ Equipe
 - Vitória Caroline
 - Andrei Lacerda
 
-Sobre o projeto
-O Vozes da Rua é um projeto acadêmico que busca facilitar o acesso a informações sobre organizações sociais e aproximar essas instituições de pessoas interessadas em ajudar. A plataforma funciona como um ponto de informação e conexão; cada instituição deve ser consultada para confirmar dados e procedimentos atualizados.
+
+*O Vozes da Rua é um projeto acadêmico que busca facilitar o acesso a informações sobre organizações sociais e aproximar essas instituições de pessoas interessadas em ajudar. A plataforma funciona como um ponto de informação e conexão; cada instituição deve ser consultada para confirmar dados e procedimentos atualizados.*
