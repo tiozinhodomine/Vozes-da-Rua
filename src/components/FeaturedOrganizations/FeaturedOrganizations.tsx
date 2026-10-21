@@ -29,6 +29,7 @@ export default function FeaturedOrganizations() {
               cidade={organization.cidade}
               descricao={organization.descricao}
               necessidades={organization.necessidades}
+              imagem={organization.imagem}
             />
           ))}
 

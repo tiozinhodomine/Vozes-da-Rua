@@ -2,6 +2,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import OrganizationCard from "../../components/OrganizationCard/OrganizationCard";
 import Footer from "../../components/Footer/Footer";
 import { organizations } from "../../data/organizations";
+import OrganizationsMap from "../../components/OrganizationsMap/OrganizationsMap";
 
 export default function Organizations() {
   return (
@@ -10,7 +11,6 @@ export default function Organizations() {
 
       <main className="min-h-screen bg-slate-50 py-20">
         <div className="mx-auto max-w-7xl px-8">
-
           <section className="text-center">
             <h1 className="text-5xl font-bold text-slate-900">
               Organizações
@@ -23,12 +23,21 @@ export default function Organizations() {
           </section>
 
           <section className="mt-16">
-            <div className="flex h-80 items-center justify-center rounded-2xl bg-slate-200">
-              <p className="text-lg text-slate-500">
-                Mapa das organizações
-              </p>
-            </div>
-          </section>
+  <div className="mb-6">
+    <h2 className="text-3xl font-bold text-slate-900">
+      Encontre organizações no mapa
+    </h2>
+
+    <p className="mt-3 text-slate-600">
+      Explore as localizações e descubra como entrar em contato
+      com cada organização.
+    </p>
+  </div>
+
+  <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+    <OrganizationsMap />
+  </div>
+</section>
 
           <section className="mt-16">
             <h2 className="mb-8 text-3xl font-bold text-slate-900">
@@ -44,11 +53,11 @@ export default function Organizations() {
                   cidade={organization.cidade}
                   descricao={organization.descricao}
                   necessidades={organization.necessidades}
+                  imagem={organization.imagem}
                 />
               ))}
             </div>
           </section>
-
         </div>
       </main>
 

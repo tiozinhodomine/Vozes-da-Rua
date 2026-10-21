@@ -7,6 +7,7 @@ interface OrganizationCardProps {
   nome: string;
   cidade: string;
   descricao: string;
+  imagem: string;
   necessidades: string[];
 }
 
@@ -16,26 +17,21 @@ export default function OrganizationCard({
   cidade,
   descricao,
   necessidades,
+  imagem,
 }: OrganizationCardProps) {
   return (
-    <div
-      className="
-        bg-white
-        rounded-2xl
-        shadow-md
-        hover:shadow-xl
-        transition-all
-        duration-300
-        overflow-hidden
-      "
-    >
-      {}
-      <div className="relative h-48 bg-slate-200 flex items-center justify-center">
-        <span className="text-slate-500">
-          Imagem da ONG
-        </span>
+    <article className="overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:shadow-xl">
+      <div className="relative flex h-48 items-center justify-center bg-slate-200">
+        <img
+          src={imagem}
+          alt={nome}
+          className="h-full w-full object-cover"
+          onError={(event) => {
+            event.currentTarget.style.display = "none";
+          }}
+        />
 
-        <div className="absolute top-3 right-3">
+        <div className="absolute right-3 top-3">
           <OrganizationFavoriteButton
             organizationId={id}
             compact
@@ -48,7 +44,7 @@ export default function OrganizationCard({
           {nome}
         </h3>
 
-        <p className="text-blue-600 mt-1">
+        <p className="mt-1 text-blue-600">
           📍 {cidade}
         </p>
 
@@ -56,18 +52,11 @@ export default function OrganizationCard({
           {descricao}
         </p>
 
-        <div className="flex flex-wrap gap-2 mt-5">
+        <div className="mt-5 flex flex-wrap gap-2">
           {necessidades.map((item) => (
             <span
               key={item}
-              className="
-                bg-blue-100
-                text-blue-700
-                px-3
-                py-1
-                rounded-full
-                text-sm
-              "
+              className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-700"
             >
               {item}
             </span>
@@ -76,22 +65,11 @@ export default function OrganizationCard({
 
         <Link
           to={`/organizacoes/${id}`}
-          className="
-            block
-            w-full
-            mt-6
-            bg-blue-600
-            text-white
-            text-center
-            py-3
-            rounded-xl
-            hover:bg-blue-700
-            transition
-          "
+          className="mt-6 block w-full rounded-xl bg-blue-600 py-3 text-center text-white transition hover:bg-blue-700"
         >
           Ver Perfil
         </Link>
       </div>
-    </div>
+    </article>
   );
 }
