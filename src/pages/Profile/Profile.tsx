@@ -32,23 +32,19 @@ export default function Profile() {
   const [removingId, setRemovingId] = useState<number | null>(null);
 
   useEffect(() => {
-    if (!loading && !user) {
-      navigate("/login");
-    }
-
-    if (user) {
-      setName(user.displayName || "");
-    }
-  }, [user, loading, navigate]);
+  if (!loading && !user) {
+    navigate("/login");
+  }
+}, [user, loading, navigate]);
 
   useEffect(() => {
     if (loading) return;
 
     if (!user) {
-      setFavoriteIds([]);
-      setFavoritesLoading(false);
       return;
     }
+
+    const userId = user.uid;
 
     let active = true;
 
@@ -57,7 +53,7 @@ export default function Profile() {
       setFavoritesError("");
 
       try {
-        const ids = await getFavoriteOrganizationIds(user.uid);
+        const ids = await getFavoriteOrganizationIds(userId);
 
         if (active) {
           setFavoriteIds(ids);
@@ -198,7 +194,13 @@ export default function Profile() {
 
               <button
                 type="button"
-                onClick={() => setEditing(!editing)}
+                onClick={() => {
+  if (!editing) {
+    setName(user.displayName || "");
+  }
+
+  setEditing(!editing);
+}}
                 className="flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700"
               >
                 <Pencil size={18} />
