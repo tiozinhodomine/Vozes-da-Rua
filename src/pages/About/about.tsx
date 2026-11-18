@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
 
 import leonardo from "../../assets/images/team/leonardo.png";
 import lorenzo from "../../assets/images/team/lorenzo.png";
@@ -209,20 +210,22 @@ export default function About() {
             </div>
 
             {}
-            <div className="relative rounded-3xl border border-green-200 bg-green-50 p-7 shadow-sm">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-green-100 font-extrabold text-green-600">
-                03
-              </div>
+            
+<div className="relative rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
+  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-100 font-extrabold text-blue-600">
+    03
+  </div>
 
-              <h3 className="mt-6 text-xl font-extrabold text-green-900">
-                As vozes
-              </h3>
+  <h3 className="mt-6 text-xl font-extrabold text-slate-900">
+    As vozes
+  </h3>
 
-              <p className="mt-3 leading-7 text-green-800">
-                Percebemos que a melhor solução seria conectar pessoas que
-                querem ajudar às organizações que já atuam na área.
-              </p>
-            </div>
+  <p className="mt-3 leading-7 text-slate-600">
+    Percebemos que a melhor solução seria conectar pessoas que
+    querem ajudar às organizações que já atuam na área.
+  </p>
+</div>
+
 
           </div>
 
@@ -434,6 +437,8 @@ export default function About() {
 
         </div>
       </section>
+
+      <Footer/>
 
     </div>
   );

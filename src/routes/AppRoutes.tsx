@@ -1,4 +1,5 @@
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import About from "../pages/About/about";
 import Home from "../pages/Home/home";
 import Organizations from "../pages/Organizations/organizations";
@@ -6,6 +7,16 @@ import OrganizationDetails from "../pages/OrganizationDetails/OrganizationDetail
 import Profile from "../pages/Profile/Profile";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 function MainLayout() {
   return <Outlet />;
@@ -17,7 +28,10 @@ function Notfound() {
 
 export default function AppRoutes() {
   return (
-    <Routes>
+    <>
+      <ScrollToTop />
+
+      <Routes>
       <Route element={<MainLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
@@ -30,6 +44,7 @@ export default function AppRoutes() {
         {}      
       </Route>
       <Route path="*" element={<Notfound />} />
-    </Routes>
+      </Routes>
+    </>
   );
 }
