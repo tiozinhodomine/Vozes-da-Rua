@@ -1,9 +1,0 @@
-@import "tailwindcss";
-@import "./theme.css";
-
-body {
-  background: var(--light);
-  color: var(--text-primary);
-  font-family: "Inter", sans-serif;
-}
-
